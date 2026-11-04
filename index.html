@@ -1,0 +1,886 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Proposta Prof. Rodrigo Geremias</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-screen "slides" that snap while scrolling, alternating ink and paper; a fixed HUD keeps the slide counter on screen. Monochrome on purpose: the only color on the page comes from her photos. */
+:root{
+  --ink:#0D0D0C;
+  --paper:#F4F4F1;
+  --paper-2:#E9E9E5;
+  --mute:#5E5E59;
+  --mute-ink:#A9A9A3;
+  --line:#CFCFC9;
+  --line-ink:#2E2E2B;
+  --f:'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --m:'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+  --t-hero:clamp(46px, 8.6vw, 132px);
+  --t-h2:clamp(36px, 5.4vw, 78px);
+  --t-h3:clamp(20px, 1.7vw, 24px);
+  --t-body:clamp(16px, 1.25vw, 19px);
+  color-scheme:light;
+}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--paper);color:var(--ink);font-family:var(--f);font-size:var(--t-body);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+*{box-sizing:border-box}
+h1,h2,h3,p,ul,ol{margin:0}
+h1,h2{font-weight:700;letter-spacing:-0.04em;line-height:0.96;text-wrap:balance}
+h1 em,h2 em{font-style:italic;font-weight:300;letter-spacing:-0.03em}
+h2{font-size:var(--t-h2)}
+h3{font-size:var(--t-h3);font-weight:600;letter-spacing:-0.01em;line-height:1.2}
+.label{font-family:var(--m);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500}
+.mute{color:var(--mute)}
+.dark .mute{color:var(--mute-ink)}
+
+/* slides */
+.s{min-height:100svh;scroll-snap-align:start;display:flex;align-items:center;position:relative;background:var(--paper);color:var(--ink)}
+.s.dark{background:var(--ink);color:var(--paper)}
+.s.alt{background:var(--paper-2)}
+.in{width:100%;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:clamp(92px, 13vh, 150px)}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:clamp(0px, 3.5vw, 48px);display:flex;flex-direction:column;gap:clamp(32px, 5vh, 56px)}
+.head{display:flex;flex-direction:column;gap:20px;max-width:980px}
+.lead{max-width:62ch;font-size:clamp(17px,1.45vw,21px);line-height:1.5}
+
+/* HUD */
+.hud{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:18px max(16px, calc(env(safe-area-inset-right,0px) + 16px)) 18px max(16px, calc(env(safe-area-inset-left,0px) + 16px));
+  color:#fff;mix-blend-mode:difference;pointer-events:none}
+.hud .count{display:flex;align-items:baseline;gap:10px;font-variant-numeric:tabular-nums}
+.hud .count b{font-family:var(--f);font-size:20px;font-weight:700;letter-spacing:-0.02em}
+.hud .now{max-width:42vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:560px){.hud .brand{display:none}}
+.bar{position:fixed;left:0;right:0;bottom:0;height:3px;z-index:20;background:#fff;mix-blend-mode:difference;transform-origin:0 50%;transform:scaleX(0)}
+.dots{position:fixed;right:max(18px, calc(env(safe-area-inset-right,0px) + 18px));top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:10px;mix-blend-mode:difference}
+.dots button{all:unset;cursor:pointer;width:8px;height:8px;border-radius:50%;border:1px solid #fff;transition:background .3s, transform .3s}
+.dots button[aria-current="true"]{background:#fff;transform:scale(1.25)}
+.dots button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (max-width:900px){.dots{display:none}}
+
+.ph{overflow:hidden;background:var(--line-ink);position:relative}
+.ph img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* cover */
+.cover .wrap{gap:clamp(28px,4.5vh,48px)}
+.cover h1{font-size:var(--t-hero);max-width:13ch}
+.cover .meta{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.marquee{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:12px;width:max-content;animation:slide 70s linear infinite}
+.track .ph{width:clamp(130px,14vw,200px);aspect-ratio:4/5;flex:none}
+.track img{filter:grayscale(1) contrast(1.05);transition:filter .6s ease}
+.track .ph:hover img{filter:none}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.track{animation:none}}
+.scroll-hint{display:flex;align-items:center;gap:10px}
+.scroll-hint i{display:block;width:1px;height:28px;background:currentColor;animation:hint 2.2s ease-in-out infinite;transform-origin:top}
+@keyframes hint{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* statement */
+.statement h2{font-size:clamp(42px,7vw,108px);max-width:14ch}
+
+/* profile */
+.profile-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.mosaic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mosaic .ph{aspect-ratio:4/5}
+.mosaic .ph:nth-child(3n+2){transform:translateY(28px)}
+.lists{display:grid;gap:36px}
+.list ul{padding:0}
+.list li{list-style:none;padding:14px 0;border-top:1px solid var(--line-ink);display:flex;gap:14px}
+.list li:last-child{border-bottom:1px solid var(--line-ink)}
+.list li span{font-family:var(--m);font-size:13px;color:var(--mute-ink);padding-top:4px;flex:none;width:18px}
+.list .label{margin-bottom:14px;display:block}
+@media (max-width:860px){.profile-grid{grid-template-columns:1fr}}
+@media (min-width:861px) and (orientation:landscape){.mosaic{position:sticky;top:96px;align-self:start}}
+
+/* four fronts */
+.fronts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink)}
+.fronts > div{padding:28px 24px 8px 0;display:flex;flex-direction:column;gap:12px}
+.fronts > div + div{padding-left:24px;border-left:1px solid var(--line)}
+.fronts .big{font-size:clamp(34px,3.4vw,48px);font-weight:300;font-style:italic;letter-spacing:-0.03em;line-height:1}
+.fronts .big + h3{margin-top:-10px;line-height:1.1}
+@media (max-width:900px){.fronts{grid-template-columns:repeat(2,minmax(0,1fr))}.fronts > div:nth-child(3){padding-left:0;border-left:0}.fronts > div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:520px){.fronts{grid-template-columns:1fr}.fronts > div{padding-left:0 !important;border-left:0 !important}.fronts > div + div{border-top:1px solid var(--line)}}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px)}
+.nums > div{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line-ink);padding-top:20px}
+.nums .n{font-size:clamp(96px,17vw,260px);font-weight:800;letter-spacing:-0.07em;line-height:0.85;font-variant-numeric:tabular-nums}
+.nums p:last-child{font-size:clamp(17px,1.5vw,22px)}
+.closer{font-size:clamp(28px,3.6vw,52px);font-weight:300;font-style:italic;letter-spacing:-0.03em;line-height:1.1;max-width:22ch}
+@media (max-width:620px){.nums{grid-template-columns:1fr}.nums > div{flex-direction:row;align-items:baseline;gap:18px}.nums .n{font-size:96px}}
+
+/* pillars: photos only */
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1.2vw,16px)}
+.pillars .ph{aspect-ratio:3/4}
+.pillars .ph::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(180deg,rgba(13,13,12,0),rgba(13,13,12,.7))}
+.pillars .cap{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:clamp(14px,1.6vw,22px);display:flex;justify-content:space-between;align-items:end;gap:8px;color:#F4F4F1}
+.pillars .cap span:first-child{font-size:clamp(16px,1.5vw,21px);font-weight:600;letter-spacing:-0.01em}
+@media (max-width:700px){.pillars{grid-template-columns:repeat(2,minmax(0,1fr))}.pillars .ph:first-child{grid-column:span 2;aspect-ratio:4/3}.pillars .cap{flex-direction:column;align-items:start;gap:4px}}
+
+/* feed */
+.feed-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,5vw,80px);align-items:center}
+.feed-text{display:flex;flex-direction:column;gap:32px;min-width:0}
+.rhythm > div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:baseline;padding:18px 0;border-top:1px solid var(--line-ink)}
+.rhythm > div:last-child{border-bottom:1px solid var(--line-ink)}
+.rhythm b{font-weight:600;font-size:clamp(20px,1.8vw,26px);letter-spacing:-0.02em}
+.legend{display:flex;flex-wrap:wrap;gap:10px 22px}
+.legend span{display:flex;align-items:center;gap:8px}
+.legend i{width:14px;height:14px;display:block;border:1px solid var(--paper)}
+.legend .lp{background:linear-gradient(135deg,#c79a86,#7a5446)}
+.legend .lr{background:var(--ink)}
+.legend .lt{background:var(--paper)}
+.phone{width:min(360px,100%);border:9px solid #2B2B28;border-radius:44px;background:var(--paper);color:var(--ink);overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45)}
+.phone .top{display:flex;align-items:center;gap:12px;padding:22px 16px 14px}
+.phone .av{width:52px;height:52px;border-radius:50%;padding:2px;background:var(--ink);flex:none}
+.phone .av img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:2px solid var(--paper);display:block}
+.phone .handle{font-weight:700;font-size:15px}
+.phone .sub{font-size:12px;color:var(--mute)}
+.phone .tabs{display:flex;justify-content:space-around;border-top:1px solid var(--line);padding:8px 0}
+.phone .tabs span{width:22%;height:2px;background:var(--line)}
+.phone .tabs span:first-child{background:var(--ink)}
+.fg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px}
+.tile{aspect-ratio:4/5;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:8px;min-width:0}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile.r{background:var(--ink);color:var(--paper)}
+.tile.r img{opacity:.55;filter:grayscale(1)}
+.tile.r::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,12,0) 30%,rgba(13,13,12,.85))}
+.tile.t{background:var(--paper-2);color:var(--ink);justify-content:center;border:1px solid var(--line)}
+.tile .tag{position:absolute;top:7px;left:8px;z-index:2;font-family:var(--m);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase}
+.tile.p .tag{color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.tile p{position:relative;z-index:2;font-size:11.5px;font-weight:700;line-height:1.15;letter-spacing:-0.01em}
+.tile.t p{font-size:12px;font-weight:600}
+.tile.t p em{font-weight:300}
+.tile.old img{opacity:.35;filter:grayscale(1)}
+.tile.old{background:var(--paper-2)}
+.tile.old .tag{color:var(--ink);text-shadow:none}
+@media (max-width:860px){.feed-grid{grid-template-columns:1fr;justify-items:center}.feed-text{justify-self:stretch}}
+/* desktop: the feed becomes a wide profile view, larger and readable */
+@media (min-width:1000px){
+  .feed-grid{grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);align-items:center}
+  .phone{width:100%;max-width:600px;justify-self:end;border:1px solid var(--line-ink);border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .phone .top{padding:22px 24px 16px;gap:16px}
+  .phone .av{width:64px;height:64px}
+  .phone .handle{font-size:18px}
+  .phone .sub{font-size:14px}
+  .tile{aspect-ratio:1/1;padding:14px}
+  .tile .tag{top:12px;left:14px;font-size:10.5px}
+  .tile p{font-size:16px;line-height:1.2}
+  .tile.t p{font-size:16px}
+}
+
+/* strategy */
+.qs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.qs > div{display:flex;flex-direction:column;gap:14px;padding-top:22px;border-top:2px solid var(--ink)}
+.qs .q{font-size:clamp(38px,4.2vw,62px);font-weight:300;font-style:italic;letter-spacing:-0.04em;line-height:1}
+.qs > div:last-child .q{font-weight:700;font-style:normal}
+.care{display:flex;gap:18px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:900px}
+@media (max-width:900px){.qs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){.qs{grid-template-columns:1fr}}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.steps > div{display:flex;flex-direction:column;gap:12px;padding-right:20px;position:relative}
+.steps .dot{width:52px;height:52px;border-radius:50%;border:1px solid var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--m);font-size:15px;background:var(--ink);position:relative;z-index:1}
+.steps > div:last-child .dot{background:var(--paper);color:var(--ink)}
+.steps > div:not(:last-child)::before{content:"";position:absolute;left:52px;right:0;top:26px;height:1px;background:var(--line-ink)}
+.steps h3{margin-top:10px}
+@media (max-width:900px){.steps{grid-template-columns:1fr;gap:26px}.steps > div{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:20px;row-gap:6px;padding-right:0}.steps .dot{grid-row:span 2}.steps h3{margin-top:12px}.steps > div:not(:last-child)::before{left:26px;top:52px;bottom:-26px;right:auto;width:1px;height:auto}}
+
+/* identity */
+.id-grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.id-text{display:flex;flex-direction:column;gap:28px;min-width:0}
+.id-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.id-tiles > div{background:var(--paper);border:1px solid var(--line);padding:24px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:220px}
+.sw{display:flex;gap:8px;flex-wrap:wrap}
+.sw i{width:44px;height:44px;border-radius:50%;display:block;border:1px solid rgba(0,0,0,.08)}
+.aa{font-size:76px;font-weight:300;font-style:italic;letter-spacing:-0.05em;line-height:.9}
+.aa b{font-style:normal;font-weight:800}
+.comp{display:grid;grid-template-columns:repeat(3,28px);gap:5px}
+.comp i{display:block;height:34px;background:var(--ink)}
+.comp i:nth-child(2n){background:var(--line)}
+.comp i:nth-child(3){background:#B98676}
+.els{display:flex;align-items:center;gap:14px}
+.els i{display:block}
+.els .a{width:30px;height:30px;border:1.5px solid var(--ink);transform:rotate(45deg)}
+.els .b{width:30px;height:30px;border-radius:50%;background:var(--ink)}
+.els .c{width:70px;height:1.5px;background:var(--ink)}
+.note{border-left:2px solid var(--ink);padding:6px 0 6px 18px;max-width:52ch}
+@media (max-width:860px){.id-grid{grid-template-columns:1fr}}
+@media (max-width:420px){.id-tiles{grid-template-columns:1fr}}
+
+/* scope */
+.scope{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px}
+.scope > div{padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:18px}
+.scope .yes{background:var(--paper);border:1px solid var(--line)}
+.scope .no{background:var(--ink);color:var(--paper)}
+.scope ul{padding:0;display:flex;flex-direction:column}
+.scope li{list-style:none;display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+.scope .no li{border-top-color:var(--line-ink);color:var(--mute-ink)}
+.scope li svg{margin-top:5px}
+@media (max-width:860px){.scope{grid-template-columns:1fr}}
+
+/* partnership */
+.duo{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:clamp(16px,2.5vw,32px);align-items:center}
+.duo > .card{padding:clamp(24px,3vw,44px);display:flex;flex-direction:column;gap:16px;align-self:stretch}
+.duo .me{background:var(--ink);color:var(--paper)}
+.duo .you{border:1px solid var(--ink)}
+.duo .who{font-size:clamp(36px,3.8vw,56px);font-weight:700;letter-spacing:-0.04em;line-height:1}
+.duo ul{padding:0}
+.duo li{list-style:none;padding:10px 0;border-top:1px solid var(--line)}
+.duo .me li{border-top-color:var(--line-ink);color:var(--mute-ink)}
+.amp{font-size:clamp(70px,9vw,140px);font-weight:300;font-style:italic;line-height:1;text-align:center}
+@media (max-width:860px){.duo{grid-template-columns:1fr}.amp{font-size:64px}}
+
+/* investment */
+.inv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,72px);align-items:center}
+.inv-text{display:flex;flex-direction:column;gap:28px;min-width:0}
+.price{border:1px solid var(--paper);padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;gap:14px}
+.price .was{text-decoration:line-through;color:var(--mute-ink);font-size:clamp(18px,1.6vw,22px)}
+.price .now{font-size:clamp(72px,9vw,150px);white-space:nowrap;font-weight:800;letter-spacing:-0.06em;line-height:.88;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.price .now small{font-size:clamp(18px,1.6vw,24px);font-weight:400;letter-spacing:0}
+.price hr{border:0;border-top:1px solid var(--line-ink);margin:8px 0;width:100%}
+.checks{padding:0;display:flex;flex-direction:column}
+.checks li{list-style:none;display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line-ink)}
+.checks li svg{margin-top:5px}
+@media (max-width:860px){.inv{grid-template-columns:1fr}}
+
+/* 90 days */
+.months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.months > div{display:flex;flex-direction:column;gap:12px;padding:28px 0 0;border-top:1px solid var(--ink);position:relative}
+.months .v{font-size:clamp(36px,3.8vw,56px);font-weight:700;letter-spacing:-0.04em;line-height:1}
+.months > div:last-child .v{font-weight:300;font-style:italic}
+.fill{position:absolute;top:-1px;left:0;height:3px;background:var(--ink);width:33%}
+.months > div:nth-child(2) .fill{width:66%}
+.months > div:nth-child(3) .fill{width:100%}
+@media (max-width:760px){.months{grid-template-columns:1fr}}
+
+/* closing */
+.close h2{font-size:clamp(40px,6.4vw,100px);max-width:15ch}
+.next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.next > div{border-top:1px solid var(--line-ink);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.next p:last-child{font-size:clamp(18px,1.6vw,22px)}
+.sign{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:end;border-top:1px solid var(--line-ink);padding-top:24px}
+.sign .name{font-size:clamp(28px,3vw,40px);font-weight:700;letter-spacing:-0.03em}
+@media (max-width:760px){.next{grid-template-columns:1fr}}
+
+/* motion: everything rests visible; browsers with scroll timelines animate it in */
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+    .rv.d1{animation-range:entry 8% entry 68%}
+    .rv.d2{animation-range:entry 16% entry 76%}
+    .rv.d3{animation-range:entry 24% entry 84%}
+    .tint img{animation:tint linear both;animation-timeline:view();animation-range:entry 40% cover 55%}
+    .tile{animation:pop linear both;animation-timeline:view();animation-range:entry var(--a) entry calc(var(--a) + 30%)}
+    .fill{animation:fill linear both;animation-timeline:view();animation-range:entry 30% cover 50%}
+    .nums .n{animation:rv linear both;animation-timeline:view();animation-range:entry 10% entry 80%}
+  }
+}
+@keyframes rv{from{opacity:0;transform:translateY(36px)}}
+@keyframes tint{from{filter:grayscale(1)}to{filter:grayscale(0)}}
+@keyframes pop{from{opacity:0;transform:scale(.86)}}
+@keyframes fill{from{width:0}}
+
+/* PDF rendering (set by the export script, not used on the live page) */
+html.pdf{scroll-snap-type:none}
+html.pdf *, html.pdf *::before, html.pdf *::after{animation:none !important;transition:none !important}
+html.pdf .hud, html.pdf .bar, html.pdf .dots, html.pdf .scroll-hint{display:none}
+html.pdf body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html.pdf .track img{filter:none}
+html.pdf .marquee{-webkit-mask-image:none;mask-image:none}
+html.pdf .in{padding-block:112px}
+html.pdf .wrap{gap:48px}
+html.pdf .cover .wrap{gap:40px}
+html.pdf .s{min-height:0}
+/* ---- Leticia / Prof. Rodrigo: burnt-yellow accent + film grain, echoing their own feed ---- */
+:root{--gold:var(--ink);--gold-ink:var(--paper)}
+.s.dark h1 em,.s.dark h2 em{color:var(--gold-ink)}
+.s.dark::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.09;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.s > .in{position:relative;z-index:1}
+.gold{color:var(--gold-ink)}
+.hl{background:linear-gradient(transparent 62%,rgba(201,149,47,.45) 62%)}
+
+/* cover */
+.cover-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid var(--line-ink);padding-top:24px}
+.cover-meta p:last-child{font-size:clamp(18px,1.6vw,24px);font-weight:600}
+@media (max-width:760px){.cover-meta{grid-template-columns:1fr}}
+.cover .kicker{display:flex;gap:10px;flex-wrap:wrap}
+.chip{font-family:var(--m);font-size:12px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line-ink);padding:8px 12px;border-radius:999px;color:var(--mute-ink)}
+
+/* definition */
+.def{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.def .lead{font-size:clamp(18px,1.6vw,23px)}
+.ana{border-left:3px solid var(--gold);padding:8px 0 8px 20px;max-width:52ch}
+.layers{display:grid;gap:10px}
+.layers > div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding:20px;border:1px solid var(--line);background:var(--paper)}
+.layers .k{font-family:var(--m);font-size:13px;color:var(--mute);padding-top:4px}
+@media (max-width:860px){.def{grid-template-columns:1fr}}
+
+/* deliverables */
+.deliv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.deliv > div{border-top:2px solid var(--paper);padding-top:22px;display:flex;flex-direction:column;gap:14px}
+.deliv ul{padding:0}
+.deliv li{list-style:none;padding:10px 0;border-top:1px solid var(--line-ink);color:var(--mute-ink)}
+.deliv li b{color:var(--paper);font-weight:600}
+@media (max-width:900px){.deliv{grid-template-columns:1fr}}
+
+/* capability map */
+.cap3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cap3 > div{padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:14px}
+.cap3 .c1{background:var(--ink);color:var(--paper)}
+.cap3 .c2{background:var(--paper);border:1px solid var(--ink)}
+.cap3 .c3{border:1px dashed var(--mute)}
+.cap3 .t{font-size:clamp(24px,2.3vw,32px);font-weight:700;letter-spacing:-0.03em;line-height:1.05}
+.cap3 ul{padding:0}
+.cap3 li{list-style:none;padding:10px 0;border-top:1px solid var(--line);font-size:16px}
+.cap3 .c1 li{border-top-color:var(--line-ink);color:#D6D6D0}
+.cap3 .c3 li{color:var(--mute)}
+@media (max-width:900px){.cap3{grid-template-columns:1fr}}
+
+/* expectation loop */
+.loop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px)}
+.loop > div{border-top:1px solid var(--line-ink);padding-top:20px;display:flex;flex-direction:column;gap:10px}
+.loop .n{font-size:clamp(56px,7vw,104px);font-weight:800;letter-spacing:-0.06em;line-height:.85}
+.loop > div:last-child .n{color:var(--gold-ink)}
+.truths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(24px,4vw,56px)}
+.truths p{padding:16px 0;border-top:1px solid var(--line-ink);color:var(--mute-ink)}
+.truths b{color:var(--paper);font-weight:600}
+@media (max-width:900px){.loop{grid-template-columns:repeat(2,minmax(0,1fr))}.truths{grid-template-columns:1fr}}
+
+/* requirements */
+.req{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(24px,4vw,56px);align-items:start}
+.must{background:var(--ink);color:var(--paper);padding:clamp(26px,3.4vw,48px);display:flex;flex-direction:column;gap:18px}
+.must .big{font-size:clamp(44px,5.4vw,80px);font-weight:800;letter-spacing:-0.05em;line-height:.9}
+.must .big em{font-style:italic;font-weight:300;color:var(--gold-ink)}
+.must p{color:#CFCFC9}
+.ck{padding:0;display:flex;flex-direction:column}
+.ck li{list-style:none;display:grid;grid-template-columns:26px minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.ck li:last-child{border-bottom:1px solid var(--line)}
+.ck .box{width:18px;height:18px;border:1.5px solid var(--ink);margin-top:3px}
+.ck small{display:block;color:var(--mute);font-size:15px;margin-top:2px}
+@media (max-width:900px){.req{grid-template-columns:1fr}}
+.opt{border:1px solid var(--line);padding:18px 20px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+
+/* build phases */
+.phases{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
+.phases > div{display:flex;flex-direction:column;gap:12px;padding:28px 0 0;border-top:1px solid var(--ink);position:relative}
+.phases .v{font-size:clamp(28px,2.8vw,40px);font-weight:700;letter-spacing:-0.04em;line-height:1}
+.phases > div:nth-child(1) .fill{width:25%}.phases > div:nth-child(2) .fill{width:50%}.phases > div:nth-child(3) .fill{width:75%}.phases > div:nth-child(4) .fill{width:100%}
+@media (max-width:900px){.phases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.phases{grid-template-columns:1fr}}
+.care .label{white-space:nowrap}
+.duo .me li{color:var(--mute)!important;border-top-color:var(--line)!important}
+.price .tbd{font-size:clamp(56px,7vw,110px)}
+/* ---- v2 additions: benefits, delivery flow, deliverables, 8-step process, light closing ---- */
+.ben{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.ben > div{border-top:2px solid var(--paper);padding-top:22px;display:flex;flex-direction:column;gap:14px}
+.ben .big{font-size:clamp(36px,3.8vw,56px);font-weight:300;font-style:italic;letter-spacing:-0.04em;line-height:1}
+@media (max-width:900px){.ben{grid-template-columns:1fr}}
+.s:not(.dark) .deliv > div{border-top-color:var(--ink)}
+.s:not(.dark) .deliv li{border-top-color:var(--line);color:var(--mute)}
+.s:not(.dark) .deliv li b{color:var(--ink)}
+.deliv .sub{font-size:15px}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.flow > div{border:1px solid var(--line-ink);padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:10px}
+.flow .k{font-family:var(--m);font-size:13px;color:var(--mute-ink)}
+.flow h3{font-size:clamp(22px,2vw,28px)}
+@media (max-width:900px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.flow{grid-template-columns:1fr}}
+.warn{border-left:2px solid var(--paper);padding:6px 0 6px 20px;max-width:78ch;display:flex;flex-direction:column;gap:8px}
+.warn p{color:var(--mute-ink)}
+.warn b{color:var(--paper);font-weight:600}
+.pack{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.pack > div{padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:16px}
+.pack .on{border:1px solid var(--ink)}
+.pack .zip{background:var(--ink);color:var(--paper)}
+.pack .t{font-size:clamp(28px,2.8vw,40px);font-weight:700;letter-spacing:-0.03em;line-height:1}
+.pack ol{padding:0;margin:0;counter-reset:i}
+.pack li{list-style:none;counter-increment:i;display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:16px}
+.pack li::before{content:counter(i,decimal-leading-zero);font-family:var(--m);font-size:12px;color:var(--mute);padding-top:3px}
+.pack .zip li{border-top-color:var(--line-ink);color:#D6D6D0}
+.pack .zip li::before{color:var(--mute-ink)}
+@media (max-width:860px){.pack{grid-template-columns:1fr}}
+.phases.eight{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:clamp(28px,4vh,44px)}
+.phases.eight .v{font-size:clamp(22px,2vw,28px)}
+@media (max-width:900px){.phases.eight{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.phases.eight{grid-template-columns:1fr}}
+.phases.eight > div:nth-child(1) .fill{width:12.5%}.phases.eight > div:nth-child(2) .fill{width:25%}.phases.eight > div:nth-child(3) .fill{width:37.5%}.phases.eight > div:nth-child(4) .fill{width:50%}
+.phases.eight > div:nth-child(5) .fill{width:62.5%}.phases.eight > div:nth-child(6) .fill{width:75%}.phases.eight > div:nth-child(7) .fill{width:87.5%}.phases.eight > div:nth-child(8) .fill{width:100%}
+.price .terms{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.price .terms div{border-top:1px solid var(--line-ink);padding-top:12px}
+.price .terms b{display:block;font-size:clamp(28px,2.6vw,38px);font-weight:700;letter-spacing:-0.03em}
+.s.close.light h2 em{color:inherit}
+.s.close.light .next > div,.s.close.light .sign{border-top-color:var(--line)}
+.price .now{font-size:clamp(52px,7.4vw,118px)}
+.adj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.adj > div{border-top:2px solid var(--ink);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.adj .k{font-size:clamp(22px,2vw,28px);font-weight:700;letter-spacing:-0.03em;line-height:1.05}
+@media (max-width:860px){.adj{grid-template-columns:1fr}}
+</style>
+
+<div class="bar" id="bar" aria-hidden="true"></div>
+<nav class="dots" id="dots" aria-label="Seções"></nav>
+
+<main>
+
+<section class="s dark cover" data-title="Abertura">
+  <div class="in"><div class="wrap">
+    <p class="label rv">Proposta de design system</p>
+    <h1 class="rv d1">A cara que vocês já têm, agora <em>em escala</em>.</h1>
+    <div class="kicker rv d2"><span class="chip">Carrosséis</span><span class="chip">Posts únicos</span><span class="chip">Carrosséis animados</span><span class="chip">Motion para Reels</span></div>
+    <div class="cover-meta rv d3">
+      <div><p class="label mute">Preparado para</p><p>Leticia Reis</p></div>
+      <div><p class="label mute">Perfil</p><p>Prof. Rodrigo Geremias</p></div>
+      <div><p class="label mute">Por</p><p>Carolina Cisz · 11/26</p></div>
+    </div>
+    <p class="label scroll-hint rv d3"><i></i>Role para começar</p>
+  </div></div>
+</section>
+
+<section class="s statement" data-title="Ponto de partida">
+  <div class="in"><div class="wrap">
+    <p class="label rv">02 · O ponto de partida</p>
+    <h2 class="rv d1">A identidade já existe. Agora é hora de <em>estruturá-la</em>.</h2>
+    <p class="lead mute rv d2">Hoje quase tudo nasce à mão, no Photoshop. Quando vocês tentaram automatizar, os posts perderam personalidade e ganharam cara de IA. A ideia aqui é o caminho contrário: organizar o padrão que vocês já usam para que o Claude trabalhe a partir dele, sempre com a supervisão da equipe.</p>
+  </div></div>
+</section>
+
+<section class="s dark" data-title="O que ouvi">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">03 · O que ouvi de vocês</p>
+      <h2 class="rv d1">Uma linguagem clara, vintage e <em>com personalidade</em>.</h2>
+    </div>
+    <div class="profile-grid">
+      <div class="list rv">
+        <span class="label mute">O que já funciona e não pode se perder</span>
+        <ul>
+          <li><span>+</span>Fundo de cor chapada, ilustração ou fotografia com ruído, sempre com letras brancas.</li>
+          <li><span>+</span>Base de brancos, com o amarelo queimado entrando como destaque.</li>
+          <li><span>+</span>Duas fontes que se alternam, com regras de negrito e quase nada de itálico.</li>
+          <li><span>+</span>Textos claros, que conversam bem com o público de vestibular.</li>
+          <li><span>+</span>A escrita com a voz do professor, que não pode virar texto genérico.</li>
+        </ul>
+      </div>
+      <div class="list rv d1">
+        <span class="label mute">O que vocês querem alcançar</span>
+        <ul>
+          <li><span>→</span>Carrosséis e posts únicos criados do zero, com a mesma cara de hoje.</li>
+          <li><span>→</span>Carrosséis com animação, sem parecer inteligência artificial.</li>
+          <li><span>→</span>Reels com legenda, palavras de ênfase e ritmo de motion design.</li>
+          <li><span>→</span>Inserções de imagens e efeitos sonoros que reforçam o discurso.</li>
+          <li><span>→</span>Tudo centralizado na equipe que vocês já têm.</li>
+        </ul>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s" data-title="O que é um design system">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">04 · O que é um design system</p>
+      <h2 class="rv d1">Um manual que orienta o Claude <em>antes de criar</em>.</h2>
+    </div>
+    <div class="def">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <p class="lead rv">É uma estrutura de padrões, componentes, referências e instruções que orienta o Claude a criar materiais alinhados à identidade que vocês já têm. Não é um aplicativo à parte, nem algo que substitui o trabalho da equipe: é o que reduz o trabalho manual na produção do dia a dia.</p>
+        <p class="ana mute rv d1">Não estamos criando uma nova marca. A identidade do professor é preservada; o trabalho é estruturá-la para que ela possa ser reproduzida com mais consistência.</p>
+      </div>
+      <div class="layers">
+        <div class="rv"><span class="k">01</span><div><h3>Regras visuais</h3><p class="mute">Cores, fontes, hierarquia de texto, uso de negrito, margens e respiro.</p></div></div>
+        <div class="rv d1"><span class="k">02</span><div><h3>Modelos e componentes</h3><p class="mute">Capa, miolo e fechamento de carrossel, post único, fundos e destaques.</p></div></div>
+        <div class="rv d2"><span class="k">03</span><div><h3>Movimento</h3><p class="mute">Como os textos entram e saem, ritmo das animações e das legendas.</p></div></div>
+        <div class="rv d3"><span class="k">04</span><div><h3>Referências e instruções</h3><p class="mute">Imagens, elementos gráficos, peças aprovadas e como reproduzir cada padrão.</p></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s dark" data-title="Benefícios">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">05 · O que muda na prática</p>
+      <h2 class="rv d1">A IA trabalhando no padrão da marca, <em>com supervisão humana</em>.</h2>
+    </div>
+    <div class="ben">
+      <div class="rv"><p class="big">Consistência</p><p class="mute">Manter a identidade visual que o público já reconhece, post após post.</p></div>
+      <div class="rv d1"><p class="big">Autonomia</p><p class="mute">A equipe produz com menos dependência de processos manuais e sem precisar de uma agência.</p></div>
+      <div class="rv d2"><p class="big">Escala</p><p class="mute">Novos conteúdos sem reconstruir cada peça do zero.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s" data-title="O que será desenvolvido">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">06 · O que será desenvolvido</p>
+      <h2 class="rv d1">Três frentes, <em>um só padrão</em>.</h2>
+    </div>
+    <div class="deliv">
+      <div class="rv"><h3>Carrosséis e posts</h3><ul>
+        <li><b>Paleta</b> e códigos das cores</li>
+        <li><b>Tipografia</b> e regras de destaque</li>
+        <li><b>Modelos</b> de capa, miolo e fechamento</li>
+        <li><b>Post único</b> nos três tipos de fundo</li>
+        <li><b>Texturas</b> e elementos gráficos</li>
+      </ul></div>
+      <div class="rv d1"><h3>Animação e Reels</h3><p class="mute sub">Padrões desenvolvidos e validados com o Claude:</p><ul>
+        <li><b>Carrosséis animados</b></li>
+        <li><b>Entrada e saída</b> de textos</li>
+        <li><b>Legendas</b> estilizadas</li>
+        <li><b>Destaques</b> de palavras e frases</li>
+        <li><b>Inserções</b> de imagens e elementos gráficos</li>
+        <li><b>Transições</b> e efeitos visuais</li>
+        <li><b>Efeitos sonoros</b> e ritmo padronizados</li>
+      </ul></div>
+      <div class="rv d2"><h3>Referências</h3><ul>
+        <li><b>Banco de imagens</b> e ilustrações de vocês</li>
+        <li><b>Efeitos sonoros</b> selecionados</li>
+        <li><b>Peças aprovadas</b> como exemplo</li>
+        <li><b>Instruções</b> para reproduzir cada formato</li>
+      </ul></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s alt" data-title="Possibilidades e limites">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">07 · Com transparência</p>
+      <h2 class="rv d1">O que entregamos, e o que <em>ainda depende de teste</em>.</h2>
+      <p class="lead mute rv d2">Prefiro deixar isso claro desde já, para vocês não investirem num design system esperando algo que a ferramenta não garante.</p>
+    </div>
+    <div class="cap3">
+      <div class="c1 rv"><p class="label" style="color:var(--gold-ink)">Desenvolvido no projeto</p><p class="t">Modelos prontos para uso</p><ul>
+        <li>Carrosséis e posts únicos no padrão de vocês</li>
+        <li>Modelos de carrossel animado</li>
+        <li>Padrões de texto em movimento, legendas e destaques</li>
+        <li>Regras de uso das imagens e dos sons selecionados</li>
+        <li>Aplicação de correções pedidas na conversa</li>
+      </ul></div>
+      <div class="c2 rv d1"><p class="label mute">Depende de validação técnica</p><p class="t">Testamos juntos no projeto</p><ul>
+        <li>Aplicar os modelos animados sobre os vídeos gravados</li>
+        <li>Legendas sincronizadas com a fala, a partir do texto ou da transcrição</li>
+        <li>Efeitos sonoros aplicados no vídeo</li>
+        <li>Exportação final em MP4</li>
+      </ul></div>
+      <div class="c3 rv d2"><p class="label mute">Não garantido</p><p class="t">Fica com a equipe ou outra ferramenta</p><ul>
+        <li>Edição automática de vídeos brutos e remoção de pausas</li>
+        <li>Geração de imagens ou vídeos inéditos</li>
+        <li>Exportação para qualquer formato</li>
+        <li>Pesquisa de imagens no Pinterest ou em outros sites</li>
+        <li>Publicação no Instagram</li>
+      </ul></div>
+    </div>
+    <div class="care rv"><span class="label">Importante</span><p class="mute">Criar modelos animados não significa que qualquer vídeo poderá ser editado automaticamente. Se for preciso uma ferramenta própria para processar ou editar vídeos, ela é tratada como projeto adicional.</p></div>
+  </div></div>
+</section>
+
+<section class="s dark" data-title="Expectativa">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">08 · Expectativa realista</p>
+      <h2 class="rv d1">Um design system não é um <em>botão mágico</em>.</h2>
+      <p class="lead mute rv d2">Ele encurta muito o caminho, mas não elimina o olhar de vocês. O normal é cada post passar por um ciclo curto antes de ser aprovado.</p>
+    </div>
+    <div class="loop">
+      <div class="rv"><p class="n">1</p><h3>Primeira versão</h3><p class="mute">Já sai no padrão: cores, fontes e estrutura certas.</p></div>
+      <div class="rv d1"><p class="n">2</p><h3>Ajustes</h3><p class="mute">Um texto que não coube, uma imagem para trocar, um destaque fora do lugar.</p></div>
+      <div class="rv d2"><p class="n">3</p><h3>Aprovação</h3><p class="mute">Revisão humana antes de publicar, sempre.</p></div>
+      <div class="rv d3"><p class="n">+</p><h3>Evolução</h3><p class="mute">Ajustes recorrentes viram orientação na documentação.</p></div>
+    </div>
+    <div class="truths rv">
+      <p><b>Pedidos iguais podem gerar resultados diferentes.</b> O padrão segura a identidade, mas cada criação é nova.</p>
+      <p><b>Os primeiros posts pedem mais ajustes.</b> O resultado fica mais preciso conforme a equipe usa e refina.</p>
+      <p><b>Formato novo pede teste.</b> Um tipo de post que nunca foi feito precisa de algumas rodadas.</p>
+      <p><b>A escrita continua sendo de vocês.</b> O Claude organiza e destaca o texto; a voz do professor vem da equipe.</p>
+    </div>
+  </div></div>
+</section>
+
+<section class="s" data-title="Dia a dia">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">09 · Como fica o dia a dia</p>
+      <h2 class="rv d1">Do roteiro ao post, <em>dentro do Claude</em>.</h2>
+    </div>
+    <div class="steps">
+      <div class="rv"><span class="dot" style="background:var(--paper);color:var(--ink);border-color:var(--ink)">1</span><h3>Texto pronto</h3><p class="mute">A equipe escreve o conteúdo, com a voz do professor.</p></div>
+      <div class="rv d1"><span class="dot" style="background:var(--paper);color:var(--ink);border-color:var(--ink)">2</span><h3>Materiais</h3><p class="mute">Imagens de referência ou o vídeo já cortado.</p></div>
+      <div class="rv d2"><span class="dot" style="background:var(--paper);color:var(--ink);border-color:var(--ink)">3</span><h3>Criação</h3><p class="mute">O Claude monta a peça seguindo o design system.</p></div>
+      <div class="rv d3"><span class="dot" style="background:var(--paper);color:var(--ink);border-color:var(--ink)">4</span><h3>Revisão</h3><p class="mute">A equipe revisa e pede os ajustes necessários.</p></div>
+      <div class="rv d3"><span class="dot" style="background:var(--ink);color:var(--paper);border-color:var(--ink)">5</span><h3>Exportar</h3><p class="mute">Baixar o arquivo final e publicar no Instagram.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s dark" data-title="Como será entregue">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">10 · Como será entregue</p>
+      <h2 class="rv d1">Construído aqui, <em>implementado com vocês</em>.</h2>
+    </div>
+    <div class="flow">
+      <div class="rv"><span class="k">01</span><h3>Desenvolvimento</h3><p class="mute">Feito no meu ambiente do Claude, onde estruturo e testo os padrões.</p></div>
+      <div class="rv d1"><span class="k">02</span><h3>Documentação</h3><p class="mute">Uma página online, hospedada no meu site, que funciona como central de referência.</p></div>
+      <div class="rv d2"><span class="k">03</span><h3>Arquivos</h3><p class="mute">Um pacote ZIP organizado com os materiais para usar e implementar.</p></div>
+      <div class="rv"><span class="k">04</span><h3>Implementação</h3><p class="mute">Orientada e validada no Claude de vocês, com testes antes da entrega definitiva.</p></div>
+      <div class="rv d1"><span class="k">05</span><h3>Treinamento</h3><p class="mute">Apresentação do funcionamento e das melhores práticas para a equipe.</p></div>
+      <div class="rv d2"><span class="k">06</span><h3>Suporte</h3><p class="mute">30 dias para dúvidas e para pequenos ajustes na entrega aprovada.</p></div>
+    </div>
+    <div class="warn rv">
+      <p><b>O Claude não importa um design system completo a partir de um link.</b> A documentação é preparada para facilitar a reconstrução no Claude de vocês, e essa etapa pode exigir configurações ou ajustes manuais, que fazemos juntos.</p>
+      <p><b>Não existe sincronização automática entre contas.</b> Por isso a transferência é testada e validada antes da entrega definitiva.</p>
+    </div>
+  </div></div>
+</section>
+
+<section class="s" data-title="Entregáveis">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">11 · Entregáveis</p>
+      <h2 class="rv d1">Uma central de consulta e um <em>pacote de uso</em>.</h2>
+    </div>
+    <div class="pack">
+      <div class="on rv">
+        <p class="label mute">Para consultar</p>
+        <p class="t">Documentação online</p>
+        <ol>
+          <li>Identidade visual e diretrizes da marca</li>
+          <li>Paleta de cores e códigos</li>
+          <li>Tipografia e regras de aplicação</li>
+          <li>Hierarquia visual e composição</li>
+          <li>Padrões de posts únicos e carrosséis</li>
+          <li>Componentes e modelos reutilizáveis</li>
+          <li>Regras de animação e motion design</li>
+          <li>Uso de imagens e elementos gráficos</li>
+          <li>Exemplos de peças aprovadas</li>
+          <li>Instruções para reproduzir os padrões no Claude</li>
+        </ol>
+      </div>
+      <div class="zip rv d1">
+        <p class="label mute">Para usar</p>
+        <p class="t">Pacote ZIP</p>
+        <ol>
+          <li>Arquivos de configuração e instruções</li>
+          <li>Referências visuais organizadas</li>
+          <li>Elementos gráficos reutilizáveis</li>
+          <li>Texturas e fundos</li>
+          <li>Modelos desenvolvidos no projeto</li>
+          <li>Efeitos sonoros selecionados</li>
+          <li>Arquivos de apoio para animações</li>
+          <li>Guia de implementação e uso</li>
+        </ol>
+        <p class="mute" style="font-size:15px;color:var(--mute-ink)">Organizado por categorias, com nomes claros. Entram apenas materiais que podem ser legalmente compartilhados.</p>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s alt" data-title="Antes de começar">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">12 · Antes de começar</p>
+      <h2 class="rv d1">O que vocês precisam ter em mãos.</h2>
+    </div>
+    <div class="req">
+      <div class="must rv">
+        <p class="label" style="color:var(--gold-ink)">Necessário</p>
+        <p class="big">Uma assinatura <em>paga</em> do Claude</p>
+        <p>Hoje, o recurso de design system está disponível nos planos pagos, como o Pro, e não na conta gratuita.</p>
+        <p>Como planos e recursos podem mudar, confirmamos juntos o plano mais adequado antes de começar.</p>
+        <p style="font-size:15px">O uso tem limite por período, compartilhado com o resto do Claude. Em semanas de muita produção, pode valer um plano com mais uso.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <ul class="ck rv d1">
+          <li><span class="box"></span><div>Posts aprovados<small>5 a 10 que melhor representam o perfil, de todos os formatos</small></div></li>
+          <li><span class="box"></span><div>Arquivos da identidade visual<small>Códigos das cores, caso queiram fidelidade total. Se não tiverem, extraímos dos últimos posts do perfil</small></div></li>
+          <li><span class="box"></span><div>Fontes utilizadas<small>Os arquivos, quando disponíveis</small></div></li>
+          <li><span class="box"></span><div>Imagens e ilustrações<small>Uma pasta no Drive organizada por tema</small></div></li>
+          <li><span class="box"></span><div>Exemplos de animações<small>PSD, PDF ou SVG. Se não tiverem, podem enviar só as imagens: extraímos o padrão a partir delas</small></div></li>
+          <li><span class="box"></span><div>Referências de vídeo<small>Exemplos do ritmo de motion e das inserções que vocês gostam</small></div></li>
+          <li><span class="box"></span><div>Logotipo e demais elementos gráficos<small>Se aparecerem nos posts</small></div></li>
+        </ul>
+        <div class="opt rv d2"><span class="label">Bom saber</span><p class="mute">A organização e a qualidade desses materiais influenciam diretamente a fidelidade do resultado. Ferramentas externas, assinaturas e eventuais custos de hospedagem ou processamento não estão incluídos no investimento.</p></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s" data-title="Escopo">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">13 · Escopo</p>
+      <h2 class="rv d1">O que está incluso, e o que <em>não está</em>.</h2>
+    </div>
+    <div class="scope">
+      <div class="yes rv">
+        <p class="label">Incluso no projeto</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>Análise das referências e dos posts atuais</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>Estruturação das diretrizes visuais</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>Modelos de post único, carrossel e carrossel animado</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>Padrões de animação e Reels desenvolvidos e validados</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>Documentação online e pacote ZIP</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>Até duas rodadas para grandes alterações</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>Implementação orientada no Claude de vocês</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>Treinamento da equipe</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#0D0D0C" stroke-width="1.6"/></svg>30 dias de pequenos ajustes e suporte para dúvidas</li>
+        </ul>
+      </div>
+      <div class="no rv d1">
+        <p class="label">Não incluso</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="#A9A9A3" stroke-width="1.6"/></svg>Produção mensal de conteúdos e gestão das redes</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="#A9A9A3" stroke-width="1.6"/></svg>Criação contínua de novas artes</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="#A9A9A3" stroke-width="1.6"/></svg>Edição recorrente de vídeos</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="#A9A9A3" stroke-width="1.6"/></svg>Novas funcionalidades após a aprovação</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="#A9A9A3" stroke-width="1.6"/></svg>Assinaturas de ferramentas</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="#A9A9A3" stroke-width="1.6"/></svg>Criação de uma nova identidade visual</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="#A9A9A3" stroke-width="1.6"/></svg>Ajustes e manutenção após os 30 dias</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="#A9A9A3" stroke-width="1.6"/></svg>Plataforma própria de edição de vídeos</li>
+        </ul>
+      </div>
+    </div>
+    <div class="care rv"><span class="label">O objetivo</span><p class="mute">Entregar autonomia para a equipe, e não uma contratação mensal de produção.</p></div>
+  </div></div>
+</section>
+
+<section class="s dark" data-title="Responsabilidades">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">14 · Responsabilidades</p>
+      <h2 class="rv d1">Uma parceria com <em>papéis claros</em>.</h2>
+    </div>
+    <div class="duo">
+      <div class="card me rv" style="background:var(--paper);color:var(--ink)">
+        <p class="label mute">Estruturação e entrega</p>
+        <p class="who">Comigo</p>
+        <ul><li>Analisar as referências</li><li>Estruturar diretrizes e modelos</li><li>Testar com conteúdos reais</li><li>Documentar e organizar os arquivos</li><li>Orientar a implementação e treinar a equipe</li></ul>
+      </div>
+      <p class="amp rv d1 gold" aria-hidden="true">&amp;</p>
+      <div class="card you rv d2" style="border-color:var(--paper)">
+        <p class="label mute">Materiais e uso</p>
+        <p class="who">Com vocês</p>
+        <ul style="color:var(--mute-ink)"><li style="border-top-color:var(--line-ink)">Manter uma assinatura compatível do Claude</li><li style="border-top-color:var(--line-ink)">Enviar os materiais e as referências</li><li style="border-top-color:var(--line-ink)">Avaliar e aprovar cada entrega</li><li style="border-top-color:var(--line-ink)">Cortar os vídeos e escrever os textos</li><li style="border-top-color:var(--line-ink)">Revisar e publicar</li></ul>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s" data-title="Etapas">
+  <div class="in"><div class="wrap">
+    <div class="head">
+      <p class="label rv">15 · Etapas do projeto</p>
+      <h2 class="rv d1">Um processo com <em>aprovação</em> em cada fase.</h2>
+    </div>
+    <div class="phases eight">
+      <div class="rv"><span class="fill"></span><p class="label mute">Etapa 1</p><p class="v">Análise</p><p class="mute">Leitura das referências e dos materiais enviados.</p></div>
+      <div class="rv d1"><span class="fill"></span><p class="label mute">Etapa 2</p><p class="v">Diretrizes</p><p class="mute">Estruturação das regras visuais.</p></div>
+      <div class="rv d2"><span class="fill"></span><p class="label mute">Etapa 3</p><p class="v">Modelos</p><p class="mute">Desenvolvimento dos modelos e componentes.</p></div>
+      <div class="rv d3"><span class="fill"></span><p class="label mute">Etapa 4</p><p class="v">Testes</p><p class="mute">Aplicação em conteúdos reais.</p></div>
+      <div class="rv"><span class="fill"></span><p class="label mute">Etapa 5</p><p class="v">Avaliação</p><p class="mute">Apresentação para a avaliação de vocês.</p></div>
+      <div class="rv d1"><span class="fill"></span><p class="label mute">Etapa 6</p><p class="v">Ajustes</p><p class="mute">Até duas rodadas para grandes alterações, dentro do escopo aprovado.</p></div>
+      <div class="rv d2"><span class="fill"></span><p class="label mute">Etapa 7</p><p class="v">Organização</p><p class="mute">Preparação da documentação e do pacote final.</p></div>
+      <div class="rv d3"><span class="fill"></span><p class="label mute">Etapa 8</p><p class="v" style="font-weight:300;font-style:italic">Entrega</p><p class="mute">Implementação orientada e treinamento.</p></div>
+    </div>
+    <div class="adj">
+      <div class="rv"><p class="label mute">Grandes alterações</p><p class="k">Até 2 rodadas</p><p class="mute">Inclusas no projeto, para mudanças maiores no design system dentro do escopo aprovado. Rodadas extras são orçadas à parte.</p></div>
+      <div class="rv d1"><p class="label mute">Pequenos ajustes</p><p class="k">30 dias de correções</p><p class="mute">Após a entrega, corrigimos detalhes de fidelidade visual, funcionamento e aplicação dos padrões.</p></div>
+      <div class="rv d2"><p class="label mute">Suporte</p><p class="k">30 dias de dúvidas</p><p class="mute">Para tirar dúvidas da equipe sobre o uso do design system.</p></div>
+    </div>
+    <p class="mute rv" style="font-size:15px;max-width:78ch">Novos formatos, mudanças de identidade ou funcionalidades adicionais não entram nas rodadas e são orçados à parte.</p>
+  </div></div>
+</section>
+
+<section class="s dark" data-title="Investimento">
+  <div class="in"><div class="wrap">
+    <div class="inv">
+      <div class="inv-text">
+        <div class="head">
+          <p class="label rv">16 · Investimento</p>
+          <h2 class="rv d1">Design system <em>personalizado</em>.</h2>
+          <p class="lead mute rv d2">Uma solução sob medida para padronizar e otimizar a produção de conteúdo do perfil.</p>
+        </div>
+        <ul class="checks rv d3">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#F4F4F1" stroke-width="1.6"/></svg>Estruturação do design system e dos modelos previstos</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#F4F4F1" stroke-width="1.6"/></svg>Documentação online e pacote de arquivos</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#F4F4F1" stroke-width="1.6"/></svg>Implementação orientada e treinamento</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#F4F4F1" stroke-width="1.6"/></svg>Até 2 rodadas de grandes alterações</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8.5l4 4 8-9" fill="none" stroke="#F4F4F1" stroke-width="1.6"/></svg>30 dias de pequenos ajustes e suporte</li>
+        </ul>
+      </div>
+      <div class="price rv d1">
+        <p class="now">R$ 3.800</p>
+        <p class="mute">investimento único, pagamento via Pix</p>
+        <div class="terms">
+          <div><b>50%</b><span class="mute">na aprovação da proposta</span></div>
+          <div><b>50%</b><span class="mute">na entrega final</span></div>
+        </div>
+        <hr>
+        <p style="font-size:16px">Não inclui assinaturas do Claude ou de outras ferramentas, nem custos de hospedagem ou processamento.</p>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="s close light" data-title="Próximos passos">
+  <div class="in"><div class="wrap">
+    <p class="label rv">17 · Vamos começar?</p>
+    <h2 class="rv d1">Menos horas no Photoshop, <em>a mesma personalidade</em> no feed.</h2>
+    <div class="next">
+      <div class="rv"><p class="label mute">Passo 1</p><p>Aprovação da proposta e entrada de 50% via Pix</p></div>
+      <div class="rv d1"><p class="label mute">Passo 2</p><p>Envio dos materiais e conversa de briefing</p></div>
+      <div class="rv d2"><p class="label mute">Passo 3</p><p>Início da análise e da estruturação</p></div>
+    </div>
+    <div class="sign rv">
+      <div><p class="label mute">Proposta por</p><p class="name">Carolina Cisz</p></div>
+    </div>
+  </div></div>
+</section>
+
+</main>
+
+
+<script>
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('section.s'));
+  var bar=document.getElementById('bar'), dots=document.getElementById('dots');
+  var btns=secs.map(function(s,i){
+    var b=document.createElement('button'); b.type='button';
+    b.setAttribute('aria-label',(i+1)+'. '+s.dataset.title);
+    b.addEventListener('click',function(){ s.scrollIntoView({behavior:'smooth'}); });
+    dots.appendChild(b); return b;
+  });
+  var cur=-1;
+  function set(i){
+    cur=i;
+    btns.forEach(function(b,j){ b.setAttribute('aria-current', j===i?'true':'false'); });
+  }
+  function onScroll(){
+    var mid=window.innerHeight*0.45, best=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i].getBoundingClientRect().top<=mid) best=i; }
+    if(best!==cur) set(best);
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.transform='scaleX('+(h>0?Math.min(1,window.scrollY/h):0)+')';
+  }
+  onScroll();
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  window.addEventListener('keydown',function(e){
+    if(e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+    var k=e.key, n=null;
+    if(k==='ArrowDown'||k==='PageDown') n=Math.min(secs.length-1,cur+1);
+    if(k==='ArrowUp'||k==='PageUp') n=Math.max(0,cur-1);
+    if(k==='Home') n=0; if(k==='End') n=secs.length-1;
+    if(n!==null){ e.preventDefault(); secs[n].scrollIntoView({behavior:'smooth'}); }
+  });
+})();
+</script>
+
+</body></html>
