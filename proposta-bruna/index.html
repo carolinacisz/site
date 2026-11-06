@@ -365,6 +365,12 @@ h1,h2{font-weight:800;letter-spacing:-0.045em;line-height:.94}
 @keyframes lout{to{clip-path:inset(0 0 100% 0);visibility:hidden}}
 @media (prefers-reduced-motion: reduce){.loader{display:none}}
 html.pdf .loader{display:none}
+.site-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--m);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--lance);border:1px solid var(--lance);border-radius:999px;padding:12px 20px;transition:background .2s,color .2s;white-space:nowrap}
+.site-btn:hover,.site-btn:focus-visible{background:var(--lance);color:var(--ink);outline:none}
+.site-btn span{font-size:14px;line-height:1}
+.brandrow .site-btn{margin-left:auto}
+@media (max-width:520px){.brandrow .site-btn{margin-left:0}}
+html.pdf .site-btn{display:none}
 </style>
 
 <div class="loader" aria-hidden="true"><div class="bd"><i style="--d:0"></i><i style="--d:1" class="k"></i><i style="--d:2"></i><i style="--d:3" class="k"></i><i style="--d:4"></i><i style="--d:5" class="k"></i><i style="--d:6"></i><i style="--d:7" class="k"></i><i style="--d:8" class="k"></i><i style="--d:9"></i><i style="--d:10" class="k"></i><i style="--d:11"></i><i style="--d:12" class="k"></i><i style="--d:13"></i><i style="--d:14" class="k"></i><i style="--d:15"></i><i style="--d:16"></i><i style="--d:17" class="k"></i><i style="--d:18"></i><i style="--d:19" class="k"></i><i style="--d:20"></i><i style="--d:21" class="k"></i><i style="--d:22"></i><i style="--d:23" class="k"></i><i style="--d:24" class="k"></i><i style="--d:25"></i><i style="--d:26" class="k"></i><i style="--d:27"></i><i style="--d:28" class="k"></i><i style="--d:29"></i><i style="--d:30" class="k"></i><i style="--d:31"></i><i style="--d:32"></i><i style="--d:33" class="k"></i><i style="--d:34"></i><i style="--d:35" class="k"></i><i style="--d:36"></i><i style="--d:37" class="k"></i><i style="--d:38"></i><i style="--d:39" class="k"></i><i style="--d:40" class="k"></i><i style="--d:41"></i><i style="--d:42" class="k"></i><i style="--d:43"></i><i style="--d:44" class="k"></i><i style="--d:45"></i><i style="--d:46" class="k"></i><i style="--d:47"></i><i style="--d:48"></i><i style="--d:49" class="k"></i><i style="--d:50"></i><i style="--d:51" class="k"></i><i style="--d:52"></i><i style="--d:53" class="k"></i><i style="--d:54"></i><i style="--d:55" class="k"></i><i style="--d:56" class="k"></i><i style="--d:57"></i><i style="--d:58" class="k"></i><i style="--d:59"></i><i style="--d:60" class="k"></i><i style="--d:61"></i><i style="--d:62" class="k"></i><i style="--d:63"></i><div class="word"><span>C</span><span>H</span><span>E</span><span>Z</span></div></div></div>
@@ -375,7 +381,7 @@ html.pdf .loader{display:none}
 
 <section class="s dark cover" data-title="Abertura">
   <div class="in"><div class="wrap">
-    <div class="brandrow rv"><span class="wm">CHE<b>Z</b></span><span class="tag">Estúdio · Um lance à frente</span></div>
+    <div class="brandrow rv"><span class="wm">CHE<b>Z</b></span><span class="tag">Estúdio · Um lance à frente</span><a class="site-btn" href="https://chezestudio.com.br/" target="_blank" rel="noopener">Conheça a CHEZ <span aria-hidden="true">↗</span></a></div>
     <p class="label eb rv">Proposta de planejamento e criação de conteúdo</p>
     <h1 class="rv d1">Seu trabalho merece ser visto com <em>estratégia</em>.</h1>
     <div class="marquee rv d2" aria-label="Trabalhos do perfil @brurossetbeauty">
@@ -703,6 +709,7 @@ html.pdf .loader{display:none}
     <div class="sign rv">
       <div><p class="label mute">Proposta por</p><p class="name">CHEZ Estúdio</p></div>
       <p class="label mute">Um lance à frente.</p>
+      <a class="site-btn" href="https://chezestudio.com.br/" target="_blank" rel="noopener">Conheça a CHEZ <span aria-hidden="true">↗</span></a>
     </div>
   </div></div>
 </section>
